@@ -16,13 +16,17 @@ def configure_logger(es_hosts: Optional[Iterable[ESHost]] = None,
     Configures logger with two handlers:
         - elsticsearch (cmreslogging.handlers.CMRESHandler
           from https://github.com/cmanaha/python-elasticsearch-logger)
-        - console (simple stdout-logger)**app_name** name
+        - console (simple stdout-logger)
+    The ElasticSearch index is created automatically. The index
+    name (lowercased) example (if **env** provided):
+    *someapp-dev-log*
 
     :param es_hosts: iterable of dicts, ElasticSearch hosts. Default is
             [{'host': 'localhost', 'port': 9200}].
     :param env: string, environment prefix (e.g. dev, tst, prd...) for
             ElasticSearch index name. Empty by default.
     :param app_name: string, name of the logger to configure.
+            'MAIN' by default
     :param log_level: string, logging level. 'INFO' by Default.
     :return: nothing
 
