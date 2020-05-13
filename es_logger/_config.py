@@ -11,7 +11,8 @@ class ESHost(TypedDict):
 
 def configure_logger(es_hosts: Optional[Iterable[ESHost]] = None,
                      env: str = '', app_name: str = 'MAIN',
-                     log_level: str = 'INFO') -> None:
+                     log_level: str = 'INFO',
+                     enable_console: bool = True) -> None:
     """
     Configures logger with two handlers:
         - elsticsearch (cmreslogging.handlers.CMRESHandler
@@ -28,6 +29,8 @@ def configure_logger(es_hosts: Optional[Iterable[ESHost]] = None,
     :param app_name: string, name of the logger to configure.
             'MAIN' by default
     :param log_level: string, logging level. 'INFO' by Default.
+    :param enable_console: bool, switch on/off 'console' handler.
+            True by default.
     :return: nothing
 
     """
@@ -61,8 +64,7 @@ def configure_logger(es_hosts: Optional[Iterable[ESHost]] = None,
                 'level': log_level,
                 'handlers': [
                     'elasticsearch',
-                    'console',
-                ],
+                ] + ['console'] if enable_console else [],
                 'propagate': False,
             },
         }
