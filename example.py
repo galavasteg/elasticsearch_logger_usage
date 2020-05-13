@@ -11,7 +11,8 @@ LOG_LEVEL = os.getenv('LOG_LEVEL', 'INFO')
 ENV = os.getenv('ENVIRONMENT', 'DEV')
 ES_HOSTS = json.loads(os.getenv('ELASTIC_HOSTS'))
 
-configure_logger(ES_HOSTS, ENV, APP_NAME)
+configure_logger(ES_HOSTS, ENV, APP_NAME,
+                 enable_console=True)
 
 log = logging.getLogger(APP_NAME)
 
